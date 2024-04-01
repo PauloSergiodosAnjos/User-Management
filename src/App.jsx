@@ -1,8 +1,11 @@
+import UserContextProvider from "./contexts/UserContext"
 import Router from "./routes/Router"
 
 function App() {
   return (
-    <Router/>
+    <UserContextProvider>
+      <Router/>
+    </UserContextProvider>
   )
 }
 
