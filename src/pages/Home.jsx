@@ -4,7 +4,7 @@ import { UserContext } from "../contexts/UserContext";
 
 export default function Home() {
 
-    const {users} = useContext(UserContext)
+    const { users, deleteUser } = useContext(UserContext)
 
     return(
         <>
@@ -37,6 +37,7 @@ export default function Home() {
                         <button>Edit</button>
                         </Link>
                     </td>
+                    <td><button onClick={()=> deleteUser(user)}>Delete</button></td>
                     </tr>
                 ))}
                 </tbody>

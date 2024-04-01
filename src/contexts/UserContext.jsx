@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext()
 
@@ -7,6 +8,7 @@ const supabase = createClient('https://riagbtjbfcihfyaxegev.supabase.co', 'eyJhb
 
 export default function UserContextProvider({children}) {
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
 
     useEffect(()=>{
         getUsers()
@@ -38,13 +40,23 @@ export default function UserContextProvider({children}) {
             {first_name: user.firstName, surname: user.surname, birth_date: user.birthDate, city: user.city, profession: user.profession}
         )
         await getUsers()
+        navigate("/")
+    }
+
+    const deleteUser = async (user)=> {
+        await supabase
+        .from('st_users')
+        .delete()
+        .eq("id", user.id)
+        await getUsers()
     }
 
     const userFuncs = {
         users,
         getUsers,
         getSpecificUser,
-        addUser
+        addUser,
+        deleteUser
     }
 
     return(
