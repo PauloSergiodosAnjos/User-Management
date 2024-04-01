@@ -31,17 +31,13 @@ export default function UserContextProvider({children}) {
     }
 
     
-    const addUser = async ({firstName, surname, birthDate, city, profession})=> {
-        const { data, error } = await supabase
+    const addUser = async (user)=> {
+        await supabase
         .from('st_users')
-        .insert([
-            {first_name: firstName},
-            {surname: surname},
-            {birth_date: birthDate},
-            {city: city},
-            {profession: profession}
-        ])
-        .select()
+        .insert(
+            {first_name: user.firstName, surname: user.surname, birth_date: user.birthDate, city: user.city, profession: user.profession}
+        )
+        await getUsers()
     }
 
     const userFuncs = {
