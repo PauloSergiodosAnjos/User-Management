@@ -16,13 +16,15 @@ export default function Edit() {
         <form onSubmit={handleSubmit(async(data)=>{
             editUser(data, user.id)
         })}>
-            <Header/>
-            <input defaultValue={user.firstName} {...register("firstName", {required: true})} required type="text" />
-            <input defaultValue={user.surname} {...register("surname", {required: true})} required type="text" />
-            <input defaultValue={user.birthDate} {...register("birthDate", {required: true})} required type="date" />
-            <input defaultValue={user.city} {...register("city", {required: true})} required type="text" />
-            <input defaultValue={user.profession} {...register("profession", {required: true})} required type="text" />
-            <input type="submit" />
+            <div className="p-5 bg-slate-200 h-screen text-center">
+                <Header/>
+                <input className="p-2 mr-3 rounded" defaultValue={user.firstName} {...register("firstName", {required: true})} required type="text" />
+                <input className="p-2 mr-3 rounded" defaultValue={user.surname} {...register("surname", {required: true})} required type="text" />
+                <input className="p-2 mr-3 rounded" defaultValue={user.birthDate} {...register("birthDate", {required: true})} required type="date" />
+                <input className="p-2 mr-3 rounded" defaultValue={user.city} {...register("city", {required: true})} required type="text" />
+                <input className="p-2 mr-3 rounded" defaultValue={user.profession} {...register("profession", {required: true})} required type="text" />
+                <input className="bg-white rounded p-2 w-20 bg-green-200 cursor-pointer" type="submit" />
+            </div>
         </form>
         </>
     )
