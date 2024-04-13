@@ -1,18 +1,29 @@
 import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import Header from "../components/Header"
 
 export default function Edit() {
     
-    const { getSpecificUser } = useContext(UserContext)
+    const { getSpecificUser, editUser } = useContext(UserContext)
     const { id } = useParams()
     const user = getSpecificUser(id)
-
-    console.log(user.id);
+    const { register, handleSubmit } = useForm()
 
     return(
         <>
-        <h1>Edit</h1>
+        <form onSubmit={handleSubmit(async(data)=>{
+            editUser(data, user.id)
+        })}>
+            <Header/>
+            <input defaultValue={user.firstName} {...register("firstName", {required: true})} required type="text" />
+            <input defaultValue={user.surname} {...register("surname", {required: true})} required type="text" />
+            <input defaultValue={user.birthDate} {...register("birthDate", {required: true})} required type="date" />
+            <input defaultValue={user.city} {...register("city", {required: true})} required type="text" />
+            <input defaultValue={user.profession} {...register("profession", {required: true})} required type="text" />
+            <input type="submit" />
+        </form>
         </>
     )
 }

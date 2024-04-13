@@ -51,12 +51,22 @@ export default function UserContextProvider({children}) {
         await getUsers()
     }
 
+    const editUser = async(user, id)=> {
+        await supabase
+        .from('st_users')
+        .update({first_name: user.firstName, surname: user.surname, birth_date: user.birthDate, city: user.city, profession: user.profession})
+        .eq('id', String(id))
+        await getUsers()
+        navigate("/")
+    }
+
     const userFuncs = {
         users,
         getUsers,
         getSpecificUser,
         addUser,
-        deleteUser
+        deleteUser,
+        editUser
     }
 
     return(
